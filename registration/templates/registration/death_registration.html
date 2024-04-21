@@ -1,0 +1,41 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Регистрация смерти</h2>
+    <form method="post" class="form-horizontal">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Зарегистрировать</button>
+    </form>
+
+    <h2>Существующие записи о смерти</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Умерший</th>
+                <th>Дата смерти</th>
+                <th>Место смерти</th>
+                <th>Причина смерти</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for death_registration in death_registrations %}
+            <tr>
+                <td>{{ death_registration.deceased_name }}</td>
+                <td>{{ death_registration.date_of_death }}</td>
+                <td>{{ death_registration.place_of_death }}</td>
+                <td>{{ death_registration.cause_of_death }}</td>
+                <td>
+                    <form method="post" action="{% url 'registration:delete_record' 'death' death_registration.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

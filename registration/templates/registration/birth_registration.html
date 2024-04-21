@@ -1,0 +1,46 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Регистрация рождения детей</h2>
+    <form method="post" class="form-horizontal">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Зарегистрировать</button>
+    </form>
+
+    <h2>Существующие записи о рождениях</h2>
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Отец</th>
+            <th>Мать</th>
+            <th>Ребенок</th>
+            <th>Дата рождения</th>
+            <th>Место рождения</th>
+            <th>Пол</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for birth_registration in birth_registrations %}
+        <tr>
+            <td>{{ birth_registration.dad_name }}</td>
+            <td>{{ birth_registration.mother_name }}</td>
+            <td>{{ birth_registration.child_name }}</td>
+            <td>{{ birth_registration.date_of_birth }}</td>
+            <td>{{ birth_registration.place_of_birth }}</td>
+            <td>{{ birth_registration.gender }}</td>
+            <td>
+                <form method="post" action="{% url 'registration:delete_record' 'birth' birth_registration.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
+

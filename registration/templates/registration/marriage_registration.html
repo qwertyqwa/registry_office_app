@@ -1,0 +1,43 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Регистрация бракосочетания</h2>
+    <form method="post" class="form-horizontal">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Зарегистрировать</button>
+    </form>
+
+    <h2>Существующие записи о бракосочетаниях</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Жених</th>
+                <th>Невеста</th>
+                <th>Дата бракосочетания</th>
+                <th>Место бракосочетания</th>
+                <th>Свидетели</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for marriage_registration in marriage_registrations %}
+            <tr>
+                <td>{{ marriage_registration.groom_name }}</td>
+                <td>{{ marriage_registration.bride_name }}</td>
+                <td>{{ marriage_registration.date_of_marriage }}</td>
+                <td>{{ marriage_registration.place_of_marriage }}</td>
+                <td>{{ marriage_registration.witnesses_names }}</td>
+                <td>
+                    <form method="post" action="{% url 'registration:delete_record' 'marriage' marriage_registration.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
