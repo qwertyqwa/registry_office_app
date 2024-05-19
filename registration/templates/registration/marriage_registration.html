@@ -17,7 +17,8 @@
                 <th>Невеста</th>
                 <th>Дата бракосочетания</th>
                 <th>Место бракосочетания</th>
-                <th>Свидетели</th>
+                <th>Свидетели жениха</th>
+                <th>Свидетели невесты</th>
                 <th>Действия</th>
             </tr>
         </thead>
@@ -28,7 +29,8 @@
                 <td>{{ marriage_registration.bride_name }}</td>
                 <td>{{ marriage_registration.date_of_marriage }}</td>
                 <td>{{ marriage_registration.place_of_marriage }}</td>
-                <td>{{ marriage_registration.witnesses_names }}</td>
+                <td>{{ marriage_registration.witnesses_groom }}</td>
+                <td>{{ marriage_registration.witnesses_bride }}</td>
                 <td>
                     <form method="post" action="{% url 'registration:delete_record' 'marriage' marriage_registration.id %}">
                         {% csrf_token %}

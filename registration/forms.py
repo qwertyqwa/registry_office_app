@@ -28,13 +28,14 @@ class BirthRegistrationForm(forms.ModelForm):
 class MarriageRegistrationForm(forms.ModelForm):
     class Meta:
         model = MarriageRegistration
-        fields = ['groom_name', 'bride_name', 'date_of_marriage', 'place_of_marriage', 'witnesses_names']
+        fields = ['groom_name', 'bride_name', 'date_of_marriage', 'place_of_marriage', 'witnesses_groom', 'witnesses_bride']
         labels = {
             'groom_name': 'Имя жениха',
             'bride_name': 'Имя невесты',
             'date_of_marriage': 'Дата бракосочетания',
             'place_of_marriage': 'Место бракосочетания',
-            'witnesses_names': 'Имена свидетелей'
+            'witnesses_groom': 'Имена свидетелей жениха',
+            'witnesses_bride': 'Имена свидетелей невесты'
         }
 
         widgets = {

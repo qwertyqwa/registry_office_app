@@ -17,7 +17,8 @@ class MarriageRegistration(models.Model):
     bride_name = models.CharField(max_length=255)
     date_of_marriage = models.DateField()
     place_of_marriage = models.CharField(max_length=255)
-    witnesses_names = models.CharField(max_length=255)
+    witnesses_groom = models.CharField(max_length=255)
+    witnesses_bride = models.CharField(max_length=255)
 
 
 class DivorceRegistration(models.Model):
