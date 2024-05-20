@@ -13,12 +13,16 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Жених</th>
-                <th>Невеста</th>
-                <th>Дата бракосочетания</th>
-                <th>Место бракосочетания</th>
-                <th>Свидетели жениха</th>
-                <th>Свидетели невесты</th>
+                <th>ФИО жениха</th>
+                <th>Гражданство жениха</th>
+                <th>Дата рождения жениха</th>
+                <th>Место рождения жениха</th>
+                <th>ФИО невесты</th>
+                <th>Гражданство невесты</th>
+                <th>Дата рождения невесты</th>
+                <th>Место рождения невесты</th>
+                <th>Новая фамилия жениха</th>
+                <th>Новая фамилия невесты</th>
                 <th>Действия</th>
             </tr>
         </thead>
@@ -26,11 +30,15 @@
             {% for marriage_registration in marriage_registrations %}
             <tr>
                 <td>{{ marriage_registration.groom_name }}</td>
+                <td>{{ marriage_registration.groom_citizenship }}</td>
+                <td>{{ marriage_registration.groom_date_of_birth }}</td>
+                <td>{{ marriage_registration.groom_place_of_birth }}</td>
                 <td>{{ marriage_registration.bride_name }}</td>
-                <td>{{ marriage_registration.date_of_marriage }}</td>
-                <td>{{ marriage_registration.place_of_marriage }}</td>
-                <td>{{ marriage_registration.witnesses_groom }}</td>
-                <td>{{ marriage_registration.witnesses_bride }}</td>
+                <td>{{ marriage_registration.bride_citizenship }}</td>
+                <td>{{ marriage_registration.bride_date_of_birth }}</td>
+                <td>{{ marriage_registration.bride_place_of_birth }}</td>
+                <td>{{ marriage_registration.groom_new_surname }}</td>
+                <td>{{ marriage_registration.bride_new_surname }}</td>
                 <td>
                     <form method="post" action="{% url 'registration:delete_record' 'marriage' marriage_registration.id %}">
                         {% csrf_token %}

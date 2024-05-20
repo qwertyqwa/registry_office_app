@@ -10,13 +10,22 @@
     </form>
 
     <h2>Существующие записи о разводах</h2>
+
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Муж</th>
-                <th>Жена</th>
+                <th>ФИО мужа</th>
+                <th>Гражданство мужа</th>
+                <th>Дата рождения мужа</th>
+                <th>Место рождения мужа</th>
+                <th>ФИО жены</th>
+                <th>Гражданство жены</th>
+                <th>Дата рождения жены</th>
+                <th>Место рождения жены</th>
+                <th>Причина развода</th>
                 <th>Дата развода</th>
-                <th>Место развода</th>
+                <th>Новая фамилия мужа</th>
+                <th>Новая фамилия жены</th>
                 <th>Действия</th>
             </tr>
         </thead>
@@ -24,9 +33,17 @@
             {% for divorce_registration in divorce_registrations %}
             <tr>
                 <td>{{ divorce_registration.husband_name }}</td>
+                <td>{{ divorce_registration.husband_citizenship }}</td>
+                <td>{{ divorce_registration.husband_date_of_birth }}</td>
+                <td>{{ divorce_registration.husband_place_of_birth }}</td>
                 <td>{{ divorce_registration.wife_name }}</td>
+                <td>{{ divorce_registration.wife_citizenship }}</td>
+                <td>{{ divorce_registration.wife_date_of_birth }}</td>
+                <td>{{ divorce_registration.wife_place_of_birth }}</td>
+                <td>{{ divorce_registration.reason }}</td>
                 <td>{{ divorce_registration.date_of_divorce }}</td>
-                <td>{{ divorce_registration.place_of_divorce }}</td>
+                <td>{{ divorce_registration.husband_new_surname }}</td>
+                <td>{{ divorce_registration.wife_new_surname }}</td>
                 <td>
                     <form method="post" action="{% url 'registration:delete_record' 'divorce' divorce_registration.id %}">
                         {% csrf_token %}

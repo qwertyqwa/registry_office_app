@@ -13,10 +13,13 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Умерший</th>
+                <th>ФИО умершего</th>
+                <th>Гражданство</th>
+                <th>Место рождения</th>
+                <th>Дата рождения</th>
                 <th>Дата смерти</th>
                 <th>Место смерти</th>
-                <th>Причина смерти</th>
+                <th>Адрес ЗАГСа</th>
                 <th>Действия</th>
             </tr>
         </thead>
@@ -24,9 +27,12 @@
             {% for death_registration in death_registrations %}
             <tr>
                 <td>{{ death_registration.deceased_name }}</td>
+                <td>{{ death_registration.citizenship }}</td>
+                <td>{{ death_registration.place_of_birth }}</td>
+                <td>{{ death_registration.date_of_birth }}</td>
                 <td>{{ death_registration.date_of_death }}</td>
                 <td>{{ death_registration.place_of_death }}</td>
-                <td>{{ death_registration.cause_of_death }}</td>
+                <td>{{ death_registration.address_registry_office }}</td>
                 <td>
                     <form method="post" action="{% url 'registration:delete_record' 'death' death_registration.id %}">
                         {% csrf_token %}

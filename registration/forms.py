@@ -4,57 +4,78 @@ from .models import BirthRegistration, MarriageRegistration, DivorceRegistration
 
 class BirthRegistrationForm(forms.ModelForm):
     class Meta:
-        GENDER_CHOICES = (
-            ('Мужской', 'Мужской'),
-            ('Женский', 'Женский')
-        )
-
         model = BirthRegistration
-        fields = ['dad_name', 'mother_name', 'child_name', 'date_of_birth', 'place_of_birth', 'gender']
+        fields = [
+            'child_name', 'child_citizenship', 'date_of_birth', 'place_of_birth',
+            'dad_name', 'dad_citizenship', 'mother_name', 'mother_citizenship', 'address_registry_office'
+        ]
         labels = {
-            'dad_name': 'Имя отца',
-            'mother_name': 'Имя матери',
-            'child_name': 'Имя ребенка',
+            'child_name': 'ФИО ребенка',
+            'child_citizenship': 'Гражданство',
             'date_of_birth': 'Дата рождения',
             'place_of_birth': 'Место рождения',
-            'gender': 'Пол'
+            'dad_name': 'ФИО отца',
+            'dad_citizenship': 'Гражданство',
+            'mother_name': 'ФИО матери',
+            'mother_citizenship': 'Гражданство',
+            'address_registry_office': 'Адрес ЗАГСа'
         }
         widgets = {
             'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
-            'gender': forms.Select(choices=GENDER_CHOICES)
         }
 
 
 class MarriageRegistrationForm(forms.ModelForm):
     class Meta:
         model = MarriageRegistration
-        fields = ['groom_name', 'bride_name', 'date_of_marriage', 'place_of_marriage', 'witnesses_groom', 'witnesses_bride']
+        fields = [
+            'groom_name', 'groom_citizenship', 'groom_date_of_birth', 'groom_place_of_birth',
+            'bride_name', 'bride_citizenship', 'bride_date_of_birth', 'bride_place_of_birth',
+            'groom_new_surname', 'bride_new_surname'
+        ]
         labels = {
-            'groom_name': 'Имя жениха',
-            'bride_name': 'Имя невесты',
-            'date_of_marriage': 'Дата бракосочетания',
-            'place_of_marriage': 'Место бракосочетания',
-            'witnesses_groom': 'Имена свидетелей жениха',
-            'witnesses_bride': 'Имена свидетелей невесты'
+            'groom_name': 'ФИО гражданина',
+            'groom_citizenship': 'Гражданство',
+            'groom_date_of_birth': 'Дата рождения',
+            'groom_place_of_birth': 'Место рождения',
+            'bride_name': 'ФИО невесты',
+            'bride_citizenship': 'Гражданство',
+            'bride_date_of_birth': 'Дата рождения',
+            'bride_place_of_birth': 'Место рождения',
+            'groom_new_surname': 'Новая фамилия жениха',
+            'bride_new_surname': 'Новая фамилия невесты'
         }
-
         widgets = {
-            'date_of_marriage': forms.DateInput(attrs={'type': 'date'}),
+            'groom_date_of_birth': forms.DateInput(attrs={'type': 'date'}),
+            'bride_date_of_birth': forms.DateInput(attrs={'type': 'date'}),
         }
 
 
 class DivorceRegistrationForm(forms.ModelForm):
     class Meta:
         model = DivorceRegistration
-        fields = ['husband_name', 'wife_name', 'date_of_divorce', 'place_of_divorce']
+        fields = [
+            'husband_name', 'husband_citizenship', 'husband_date_of_birth', 'husband_place_of_birth',
+            'wife_name', 'wife_citizenship', 'wife_date_of_birth', 'wife_place_of_birth',
+            'reason', 'date_of_divorce', 'husband_new_surname', 'wife_new_surname'
+        ]
         labels = {
-            'husband_name': 'Имя мужа',
-            'wife_name': 'Имя жены',
+            'husband_name': 'ФИО мужа',
+            'husband_citizenship': 'Гражданство',
+            'husband_date_of_birth': 'Дата рождения',
+            'husband_place_of_birth': 'Место рождения',
+            'wife_name': 'ФИО жены',
+            'wife_citizenship': 'Гражданство',
+            'wife_date_of_birth': 'Дата рождения',
+            'wife_place_of_birth': 'Место рождения',
+            'reason': 'Причина развода',
             'date_of_divorce': 'Дата развода',
-            'place_of_divorce': 'Место развода'
+            'husband_new_surname': 'Новая фамилия мужа',
+            'wife_new_surname': 'Новая фамилия жены'
         }
-
         widgets = {
+            'husband_date_of_birth': forms.DateInput(attrs={'type': 'date'}),
+            'wife_date_of_birth': forms.DateInput(attrs={'type': 'date'}),
             'date_of_divorce': forms.DateInput(attrs={'type': 'date'}),
         }
 
@@ -62,14 +83,20 @@ class DivorceRegistrationForm(forms.ModelForm):
 class DeathRegistrationForm(forms.ModelForm):
     class Meta:
         model = DeathRegistration
-        fields = ['deceased_name', 'date_of_death', 'place_of_death', 'cause_of_death']
+        fields = [
+            'deceased_name', 'citizenship', 'place_of_birth', 'date_of_birth', 'date_of_death',
+            'place_of_death', 'address_registry_office'
+        ]
         labels = {
-            'deceased_name': 'Имя умершего',
+            'deceased_name': 'ФИО умершего',
+            'citizenship': 'Гражданство',
+            'place_of_birth': 'Место рождения',
+            'date_of_birth': 'Дата рождения',
             'date_of_death': 'Дата смерти',
             'place_of_death': 'Место смерти',
-            'cause_of_death': 'Причина смерти'
+            'address_registry_office': 'Адрес ЗАГСа'
         }
-
         widgets = {
+            'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
             'date_of_death': forms.DateInput(attrs={'type': 'date'}),
         }
